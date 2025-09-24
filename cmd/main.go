@@ -6,11 +6,14 @@ import (
 	"go-fiber/internal/home"
 
 	"github.com/gofiber/fiber/v2"
+	"github.com/gofiber/fiber/v2/middleware/recover"
 )
 
 func main() {
 	app := fiber.New()
 	config.Init()
+	app.Use(recover.New())
+
 
 	cfg := config.NewDatabaseConfig()
 	fmt.Println(cfg)
