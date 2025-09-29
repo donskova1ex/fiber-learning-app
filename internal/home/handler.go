@@ -1,9 +1,6 @@
 package home
 
 import (
-	"bytes"
-	"html/template"
-
 	"github.com/gofiber/fiber/v2"
 	"github.com/rs/zerolog"
 )
@@ -31,17 +28,8 @@ func (h *HomeHandler) home(c *fiber.Ctx) error {
 		Str("ip", c.IP()).
 		Str("email", "a@a.ru").
 		Msg("HomeHandler")
-	tmpl := template.Must(template.ParseFiles("./html/page.html"))
-
 	data := struct{ Count int }{Count: 1}
-
-	var tpl bytes.Buffer
-	if err := tmpl.Execute(&tpl, data); err != nil {
-		return fiber.NewError(fiber.StatusBadRequest, err.Error())
-	}
-	c.Set(fiber.HeaderContentType, fiber.MIMETextHTML)
-
-	return c.Send(tpl.Bytes())
+	return c.Render("page", data)
 }
 
 func (h *HomeHandler) error(c *fiber.Ctx) error {
