@@ -22,13 +22,20 @@ func NewHandler(router fiber.Router, customLogger *zerolog.Logger) {
 
 func (h *HomeHandler) home(c *fiber.Ctx) error {
 	h.customLogger.Info().
-		Bool("isAdmin", true).
 		Str("method", c.Method()).
 		Str("path", c.Path()).
 		Str("ip", c.IP()).
 		Str("email", "a@a.ru").
 		Msg("HomeHandler")
-	data := struct{ Count int }{Count: 1}
+	data := struct {
+		Count   int
+		IsAdmin bool
+		CanUse  bool
+	}{
+		Count:   10,
+		IsAdmin: true,
+		CanUse:  true,
+	}
 	return c.Render("page", data)
 }
 
