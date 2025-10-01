@@ -8,26 +8,17 @@
 </head>
 
 <body>
-    {{.Count}} - users count
-    <br />
-    {{if .IsAdmin}}
-    <p>You're admin</p>
-    {{else}}
-    <p>You're not admin</p>
-    {{end}}
-    <br />
-    {{if eq .Count 0}}
-    <p>Пользователей нет</p>
-    {{ else if lt .Count 10}}
-    <p>Пользователей меньше 10</p>
-    {{else}}
-    <p>Пользователей 10 или более</p>
-    {{end}}
-    <br />
-    {{if and .IsAdmin .CanUse}}
-    <p>Доступ разрешен и админ</p>
-    {{else}}
-    {{end}}
+
+    <div>
+        {{ range .Names}}
+        <p>{{.}}</p>
+        {{ end}}
+    </div>
+    <div>
+        {{ range .Users}}
+        <p>{{.Id}} - {{.Name}}</p>
+        {{ end}}
+    </div>
 </body>
 
 </html>
