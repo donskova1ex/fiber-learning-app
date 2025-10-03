@@ -5,6 +5,7 @@ import (
 	"go-fiber/config"
 	"go-fiber/internal/home"
 	"go-fiber/pkg/logger"
+	"strings"
 
 	"github.com/gofiber/contrib/fiberzerolog"
 	"github.com/gofiber/fiber/v2"
@@ -21,6 +22,16 @@ func main() {
 
 	customLogger := logger.NewLogger(logCfg)
 	engine := html.New("./html", ".html")
+	engine.AddFuncMap(map[string]interface{}{
+		"ToUpper": func(s string) string {
+			switch s {
+			case "":
+				return ""
+			default:
+				return strings.ToUpper(s)
+			}
+		},
+	})
 
 	app := fiber.New(fiber.Config{
 		Views: engine,

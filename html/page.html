@@ -8,15 +8,16 @@
 </head>
 
 <body>
-
+    {{ $test := "test" }}
     <div>
-        {{ range .Names}}
-        <p>{{.}}</p>
-        {{ end}}
+        {{ range .Names }}
+        <p>{{ . }}</p>
+        {{ end }}
     </div>
+    {{ $test = "изменение" }}
     <div>
-        {{ range .Users}}
-        <p>{{.Id}} - {{.Name}}</p>
+        {{ range .Users }}
+        <p>{{ .Id }} - {{ .Name | ToUpper }} - {{$test }}</p>
         {{ end}}
     </div>
 </body>
