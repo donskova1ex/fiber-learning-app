@@ -1,25 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
+{{ template "base" }}
 
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Страница</title>
-</head>
-
-<body>
-    {{ $test := "test" }}
-    <div>
-        {{ range .Names }}
-        <p>{{ . }}</p>
-        {{ end }}
-    </div>
-    {{ $test = "изменение" }}
-    <div>
-        {{ range .Users }}
-        <p>{{ .Id }} - {{ .Name | ToUpper }} - {{$test }}</p>
-        {{ end}}
-    </div>
-</body>
-
-</html>
+{{ define "title"}}
+<title>Главная страница</title>
+{{ end }} {{ define "content"}}
+<p>Page 1</p>
+{{ end }}
