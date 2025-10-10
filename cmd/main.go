@@ -25,6 +25,7 @@ func main() {
 		Logger: customLogger,
 	}))
 	app.Use(recover.New())
+	app.Static("public", "./public")
 
 	fmt.Println(cfg, logCfg)
 
