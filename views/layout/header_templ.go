@@ -12,8 +12,9 @@ import "fmt"
 
 func headerClass(percent int) templ.CSSClass {
 	templ_7745c5c3_CSSBuilder := templruntime.GetBuilder()
-	templ_7745c5c3_CSSBuilder.WriteString(string(templ.SanitizeCSS(`background`, "#1cc995")))
+	templ_7745c5c3_CSSBuilder.WriteString(string(templ.SanitizeCSS(`background`, "#222222")))
 	templ_7745c5c3_CSSBuilder.WriteString(string(templ.SanitizeCSS(`width`, fmt.Sprintf("%d%%", percent))))
+	templ_7745c5c3_CSSBuilder.WriteString(string(templ.SanitizeCSS(`text-align`, "center")))
 	templ_7745c5c3_CSSID := templ.CSSID(`headerClass`, templ_7745c5c3_CSSBuilder.String())
 	return templ.ComponentCSSClass{
 		ID:    templ_7745c5c3_CSSID,

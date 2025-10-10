@@ -3,8 +3,9 @@ package layout
 import "fmt"
 
 css headerClass(percent int) {
-    background: { "#1cc995" };
+    background: { "#222222" };
     width: {fmt.Sprintf("%d%%", percent)};
+    text-align: {"center"};
 }
 
 templ Header() {
