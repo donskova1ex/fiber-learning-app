@@ -5,13 +5,13 @@ import "go-fiber/views/components"
 templ Menu() {
 	@MenuStyle()
 	<div class="menu">
-	    <img src="/public/images/logo.svg"/>
-	    <div class="menu_right">
-	        <a class="menu_right_link">Войти</a>
+		<img src="/public/images/logo.svg"/>
+		<div class="menu_right">
+			<a class="menu_right_link">Войти</a>
 			@components.LinkButton("/register") {
-			    <span>Зарегистрироваться</span>
+				<span>Зарегистрироваться</span>
 			}
-	    </div>
+		</div>
 	</div>
 }
 
@@ -32,7 +32,7 @@ templ MenuStyle() {
     	    }
     	    .menu_right_link{
     	        text-decoration: none;
-    	        color: var(--color-white);
+    	        color: var(--color-primary-white);
     	        font-size: 16px;
     	        cursor: pointer;
     	    }

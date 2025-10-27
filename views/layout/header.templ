@@ -1,14 +1,15 @@
 package layout
 
 templ Header() {
-    @HeaderStyle()
+	@HeaderStyle()
 	<div class="header">
-	    @Menu()
-	    { children... }
+		@Menu()
+		{ children... }
 	</div>
 }
+
 templ HeaderStyle() {
-    <style>
+	<style>
         .header {
             background: #222222;
             display: flex;
