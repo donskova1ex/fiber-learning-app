@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"go-fiber/config"
 	"go-fiber/internal/home"
+	"go-fiber/internal/home/vacancy"
 	"go-fiber/pkg/logger"
 
 	"github.com/gofiber/contrib/fiberzerolog"
@@ -30,6 +31,7 @@ func main() {
 	fmt.Println(cfg, logCfg)
 
 	home.NewHandler(app, customLogger)
+	vacancy.NewHandler(app, customLogger)
 
 	err := app.Listen(":3000")
 	if err != nil {
