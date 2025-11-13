@@ -6,11 +6,11 @@ import (
 	"github.com/gobuffalo/validate"
 )
 
-func FornmatErrors(errors *validate.Errors) string {
+func FormatErrors(errors *validate.Errors) string {
 	var res string
 
-	for key, value := range errors.Errors {
-		res = res + key + ": " + strings.Join(value, ", ") + ", "
+	for _, value := range errors.Errors {
+		res = res + strings.Join(value, ", ") + ";\n"
 	}
 
 	return res

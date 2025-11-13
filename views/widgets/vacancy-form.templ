@@ -36,7 +36,8 @@ templ VacancyForm() {
 				})
 			</div>
 			@components.SubmitButton() {
-				<span>Опубликовать вакансию</span>
+				<div class="vacancy-form-submit">Опубликовать вакансию</div>
+				<div class="vacancy-form-loader"></div>
 			}
 		</form>
 	</div>
@@ -72,5 +73,31 @@ templ VacancyFormStyle() {
             font-weight: 400;
             line-height: normal;
         }
+
+		.vacancy-form-loader {
+			display: none;
+		}
+
+		.htmx-request .vacancy-form-submit {
+			display: none;
+		}
+
+		.htmx-request .vacancy-form-loader {
+			display: block;
+			width: 50px;
+			padding: 8px;
+			aspect-ratio: 1;
+			border-radius: 50%;
+			background: #fdfdfd;
+			--_m: 
+				conic-gradient(#0000 10%,#000),
+				linear-gradient(#000 0 0) content-box;
+			-webkit-mask: var(--_m);
+					mask: var(--_m);
+			-webkit-mask-composite: source-out;
+					mask-composite: subtract;
+			animation: l3 1s infinite linear;
+			}
+		@keyframes l3 {to{transform: rotate(2turn)}}
     </style>
 }
