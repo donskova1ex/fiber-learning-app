@@ -12,7 +12,5 @@ func FormatErrors(errors *validate.Errors) string {
 	for _, value := range errors.Errors {
 		res = res + strings.Join(value, ", ") + ";\n"
 	}
-
 	return res
-
 }

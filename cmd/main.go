@@ -5,6 +5,7 @@ import (
 	"go-fiber/config"
 	"go-fiber/internal/home"
 	"go-fiber/internal/home/vacancy"
+	"go-fiber/pkg/database"
 	"go-fiber/pkg/logger"
 
 	"github.com/gofiber/contrib/fiberzerolog"
@@ -18,6 +19,7 @@ func main() {
 
 	cfg := config.NewDatabaseConfig()
 	logCfg := config.NewLogConfig()
+	dbConfig := config.NewDatabaseConfig()
 
 	customLogger := logger.NewLogger(logCfg)
 
@@ -27,6 +29,8 @@ func main() {
 	}))
 	app.Use(recover.New())
 	app.Static("public", "./public")
+	dbpool := database.CreateDBPool(dbConfig, customLogger)
+	defer dbpool.Close()
 
 	fmt.Println(cfg, logCfg)
 
