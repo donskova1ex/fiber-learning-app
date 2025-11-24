@@ -16,12 +16,14 @@ import (
 type VacancyHandler struct {
 	router       fiber.Router
 	customLogger *zerolog.Logger
+	repo         *VacancyRepository
 }
 
-func NewHandler(router fiber.Router, customLogger *zerolog.Logger) {
+func NewHandler(router fiber.Router, customLogger *zerolog.Logger, repo *VacancyRepository) {
 	handler := &VacancyHandler{
 		router:       router,
 		customLogger: customLogger,
+		repo:         repo,
 	}
 
 	vacancyGroup := handler.router.Group("/vacancy")
@@ -51,6 +53,9 @@ func (h *VacancyHandler) createVacancy(c *fiber.Ctx) error {
 		component = components.Notification(validator.FormatErrors(errors), components.NotificationFail)
 		return t_adapter.Render(c, component)
 	}
+
+	//vacancy := NewVacancyFromCreateForm(form)
+
 	component = components.Notification("Vacancy created", components.NotificationSuccess)
 	return t_adapter.Render(c, component)
 }
