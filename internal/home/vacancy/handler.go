@@ -16,14 +16,14 @@ import (
 type VacancyHandler struct {
 	router       fiber.Router
 	customLogger *zerolog.Logger
-	repo         *VacancyRepository
+	service      *VacancyService
 }
 
-func NewHandler(router fiber.Router, customLogger *zerolog.Logger, repo *VacancyRepository) {
+func NewHandler(router fiber.Router, customLogger *zerolog.Logger, service *VacancyService) {
 	handler := &VacancyHandler{
 		router:       router,
 		customLogger: customLogger,
-		repo:         repo,
+		service:      service,
 	}
 
 	vacancyGroup := handler.router.Group("/vacancy")
@@ -42,7 +42,7 @@ func (h *VacancyHandler) createVacancy(c *fiber.Ctx) error {
 	errors := validate.Validate(
 		&validators.EmailIsPresent{Name: "Email", Field: form.Email, Message: "Email не задан или неверный"},
 		&validators.StringIsPresent{Name: "Location", Field: form.Location, Message: "Не задано расположение"},
-		&validators.StringIsPresent{Name: "Сompany", Field: form.Company, Message: "Не задана компания"},
+		&validators.StringIsPresent{Name: "Company", Field: form.Company, Message: "Не задана компания"},
 		&validators.StringIsPresent{Name: "Salary", Field: form.Salary, Message: "Не задана заработная плата"},
 		&validators.StringIsPresent{Name: "Role", Field: form.Role, Message: "Не задана должность"},
 		&validators.StringIsPresent{Name: "Type", Field: form.Type, Message: "Не задан тип компании"},
@@ -54,8 +54,12 @@ func (h *VacancyHandler) createVacancy(c *fiber.Ctx) error {
 		return t_adapter.Render(c, component)
 	}
 
-	//vacancy := NewVacancyFromCreateForm(form)
-
+	err := h.service.CreateVacancy(c.Context(), form)
+	if err != nil {
+		h.customLogger.Error().Err(err).Msg("creating vacancy error")
+		component = components.Notification("Internal server error", components.NotificationFail)
+		return t_adapter.Render(c, component)
+	}
 	component = components.Notification("Vacancy created", components.NotificationSuccess)
 	return t_adapter.Render(c, component)
 }

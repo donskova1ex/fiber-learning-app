@@ -18,7 +18,7 @@ func CreateDBPool(config *config.DatabaseConfig, log *zerolog.Logger) *pgxpool.P
 		log.Error().Msg("Failed to ping database")
 		panic(err)
 	}
-	log.Info().Msg("Connertion created")
+	log.Info().Msg("Connection created")
 	return dbpool
 
 }

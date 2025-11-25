@@ -10,6 +10,7 @@ import (
 	"github.com/gofiber/contrib/fiberzerolog"
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/recover"
+	"github.com/jackc/pgx/v5/pgxpool"
 	"github.com/rs/zerolog"
 )
 
@@ -22,10 +23,13 @@ func main() {
 	customLogger := logger.NewLogger(logCfg)
 	customLogger.Info().Msg("configurations initializing")
 
+	dbpool := database.CreateDBPool(dbConfig, customLogger)
+	defer dbpool.Close()
+
 	app := NewApp(
 		fiber.New(),
 		customLogger,
-		dbConfig,
+		dbpool,
 	)
 	customLogger.Info().Msg("new application created")
 
@@ -39,11 +43,8 @@ func main() {
 func NewApp(
 	app *fiber.App,
 	logger *zerolog.Logger,
-	dbConfig *config.DatabaseConfig,
+	dbpool *pgxpool.Pool,
 ) *fiber.App {
-
-	dbpool := database.CreateDBPool(dbConfig, logger)
-	defer dbpool.Close()
 
 	app.Use(fiberzerolog.New(fiberzerolog.Config{
 		Logger: logger,
@@ -53,10 +54,12 @@ func NewApp(
 
 	//Repositories
 	vacancyRepo := vacancy.NewVacancyRepository(dbpool, logger)
+	//Services
+	vacancyService := vacancy.NewVacancyService(vacancyRepo, logger)
 
 	//Handlers
 	home.NewHandler(app, logger)
-	vacancy.NewHandler(app, logger, vacancyRepo)
+	vacancy.NewHandler(app, logger, vacancyService)
 
 	return app
 }
