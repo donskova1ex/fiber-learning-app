@@ -29,7 +29,7 @@ func NewHandler(router fiber.Router, customLogger *zerolog.Logger) {
 
 func (h *HomeHandler) home(c *fiber.Ctx) error {
 	component := views.Main()
-	return t_adapter.Render(c, component)
+	return t_adapter.Render(c, component, fiber.StatusOK)
 }
 
 func (h *HomeHandler) error(c *fiber.Ctx) error {

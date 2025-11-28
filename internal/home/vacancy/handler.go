@@ -51,15 +51,15 @@ func (h *VacancyHandler) createVacancy(c *fiber.Ctx) error {
 	var component templ.Component
 	if len(errors.Errors) > 0 {
 		component = components.Notification(validator.FormatErrors(errors), components.NotificationFail)
-		return t_adapter.Render(c, component)
+		return t_adapter.Render(c, component, fiber.StatusBadRequest)
 	}
 
 	err := h.service.CreateVacancy(c.Context(), form)
 	if err != nil {
 		h.customLogger.Error().Err(err).Msg("creating vacancy error")
 		component = components.Notification("Internal server error", components.NotificationFail)
-		return t_adapter.Render(c, component)
+		return t_adapter.Render(c, component, fiber.StatusInternalServerError)
 	}
 	component = components.Notification("Vacancy created", components.NotificationSuccess)
-	return t_adapter.Render(c, component)
+	return t_adapter.Render(c, component, fiber.StatusOK)
 }
