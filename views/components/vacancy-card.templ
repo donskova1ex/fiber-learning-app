@@ -1,0 +1,82 @@
+package components
+
+import "time"
+import string
+import string
+import string
+import func() string
+
+type VacancyCardProps struct {
+	created_at  time.Time
+	role        string
+	location    string
+	salary      string
+	companyType string
+	company     string
+	email       string
+}
+
+templ VacancyCard(props VacancyCardProps) {
+	@VacancyCardStyle()
+	<div class="vacancy-card">
+        <div>
+            <span class="vacancy-card__created_at">
+                {props.created_at.String()}
+            </span>
+        </div>
+        <div class="vacancy-card__title">
+            <div class="vacancy-card__role">
+                {props.role}
+            </div>
+            <div class="vacancy-card__company">
+                {props.company}
+            </div>
+            <div class="vacancy-card__footer">
+                <div>
+                    {props.companyType}
+                    //TODO:continue
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+templ VacancyCardStyle() {
+	<style>
+        .vacancy-card {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+            padding: 40px;
+            border-radius: 20px;
+            background: var(--color-primary-white);
+            box-shadow: 0 px 3px 8px 0px rgba(48, 260, 137, 0.08);
+        }
+        .vacancy-card__created_at {
+            border-radius: 8px;
+            background: rgba(48, 150, 137, 0.10);
+            padding: 8px;
+            color: var(--color-primary);
+        }
+        .vacancy-card__title {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .vacancy-card__role {
+            font-size: 28px;
+            font-weight: 600;
+            color: var(--color-primary-black);
+        }
+        .vacancy-card__company {
+            font-size: 16px;
+            font-weight: 400;
+            color: var(--color-primary-black);           
+        }
+        .vacancy-card__footer {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+        }
+    </style>
+}
