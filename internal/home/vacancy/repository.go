@@ -49,10 +49,11 @@ func (r *VacancyRepository) GetVacancies() ([]*Vacancy, error) {
 	if err != nil {
 		return nil, fmt.Errorf("failed to get vacancies from database: %w", err)
 	}
+	defer rows.Close()
 
-	vacansies, err := pgx.CollectRows(rows, pgx.RowToAddrOfStructByName[Vacancy])
+	vacanсies, err := pgx.CollectRows(rows, pgx.RowToAddrOfStructByName[Vacancy])
 	if err != nil {
 		return nil, fmt.Errorf("failed to collect vacancies from query: %w", err)
 	}
-	return vacansies, nil
+	return vacanсies, nil
 }
