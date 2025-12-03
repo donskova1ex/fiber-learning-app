@@ -34,7 +34,11 @@ func NewHandler(router fiber.Router, customLogger *zerolog.Logger, service *Vaca
 func (h *VacancyHandler) getAll(c *fiber.Ctx) error {
 	vacancies, err := h.service.GetVacancies()
 	if err != nil {
-		h.customLogger.Error().Err(err).Msg("getting vacancies error")
+		return c.Status(fiber.StatusInternalServerError).JSON(
+			fiber.Map{
+				"error":"internal server error",
+			},
+		)
 	}
 	return c.JSON(vacancies)
 }
@@ -65,7 +69,6 @@ func (h *VacancyHandler) createVacancy(c *fiber.Ctx) error {
 
 	err := h.service.CreateVacancy(c.Context(), form)
 	if err != nil {
-		h.customLogger.Error().Err(err).Msg("creating vacancy error")
 		component = components.Notification("Internal server error", components.NotificationFail)
 		return t_adapter.Render(c, component, fiber.StatusInternalServerError)
 	}
