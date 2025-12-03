@@ -42,3 +42,18 @@ func (r *VacancyRepository) CreateVacancy(vacancy *Vacancy) error {
 	}
 	return nil
 }
+
+func (r *VacancyRepository) GetVacancies() ([]*Vacancy, error) {
+	query := `SELECT id, email, role, company, salary, type, location, created_at FROM vacancies;`
+	rows, err := r.Dbpool.Query(context.Background(), query)
+	if err != nil {
+		return nil, fmt.Errorf("failed to get vacancies from database: %w", err)
+	}
+
+	vacansies, err := pgx.CollectRows(rows, pgx.RowToAddrOfStructByName[Vacancy])
+	if err != nil {
+		return nil, fmt.Errorf("failed to collect vacancies from query: %w", err)
+	}
+	return vacansies, nil
+	
+}

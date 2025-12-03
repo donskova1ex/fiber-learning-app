@@ -1,44 +1,59 @@
 package components
 
 import "time"
-import string
-import string
-import string
-import func() string
 
 type VacancyCardProps struct {
-	created_at  time.Time
-	role        string
-	location    string
-	salary      string
-	companyType string
-	company     string
-	email       string
+	Created_at  time.Time
+	Role        string
+	Location    string
+	Salary      string
+	CompanyType string
+	Company     string
+	Email       string
 }
 
 templ VacancyCard(props VacancyCardProps) {
 	@VacancyCardStyle()
 	<div class="vacancy-card">
-        <div>
-            <span class="vacancy-card__created_at">
-                {props.created_at.String()}
-            </span>
-        </div>
-        <div class="vacancy-card__title">
-            <div class="vacancy-card__role">
-                {props.role}
-            </div>
-            <div class="vacancy-card__company">
-                {props.company}
-            </div>
-            <div class="vacancy-card__footer">
-                <div>
-                    {props.companyType}
-                    //TODO:continue
-                </div>
-            </div>
-        </div>
-    </div>
+		<div>
+			<span class="vacancy-card__created_at">
+				{ props.Created_at.String() }
+			</span>
+		</div>
+		<div class="vacancy-card__title">
+			<div class="vacancy-card__role">
+				{ props.Role }
+			</div>
+			<div class="vacancy-card__company">
+				{ props.Company }
+			</div>
+			<div class="vacancy-card__footer">
+				<div class="vacancy-card__stats">
+					<div class="vacancy-card__stat">
+						<img src="/public/icons/company-type.svg" alt="Иконка портфеля"/>
+						<span>
+							{ props.CompanyType }
+						</span>
+					</div>
+					<div class="vacancy-card__stat">
+						<img src="/public/icons/salary.svg" alt="Иконка кошелька"/>
+						<span>
+							{ props.Salary }
+						</span>
+					</div>
+					<div class="vacancy-card__stat">
+						<img src="/public/icons/location.svg" alt="Иконка карты"/>
+						<span>
+							{ props.Location }
+						</span>
+					</div>
+				</div>
+				@LinkButton("") {
+					<span>Откликнуться</span>
+				}
+			</div>
+		</div>
+	</div>
 }
 
 templ VacancyCardStyle() {
@@ -77,6 +92,15 @@ templ VacancyCardStyle() {
             display: flex;
             align-items: flex-end;
             justify-content: space-between;
+        }
+        .vacancy-card__stat {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .vacancy-card__stats {
+            display: flex;
+            gap: 24px;
         }
     </style>
 }

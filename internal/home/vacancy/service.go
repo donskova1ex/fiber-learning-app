@@ -3,6 +3,7 @@ package vacancy
 import (
 	"context"
 	"fmt"
+
 	"github.com/rs/zerolog"
 )
 
@@ -26,4 +27,13 @@ func (s *VacancyService) CreateVacancy(ctx context.Context, form VacancyCreateFo
 		return fmt.Errorf("internal error: %w", err)
 	}
 	return nil
+}
+
+func (s *VacancyService) GetVacancies() ([]*Vacancy, error) {
+	vacansies, err := s.repo.GetVacancies()
+	if err != nil {
+		s.log.Error().Err(err).Msg("failed to get vacancies in service")
+		return nil, fmt.Errorf("internal error: %w", err)
+	}
+	return vacansies, nil
 }

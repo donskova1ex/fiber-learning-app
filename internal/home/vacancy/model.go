@@ -1,5 +1,7 @@
 package vacancy
 
+import "time"
+
 type VacancyCreateForm struct {
 	Email    string
 	Role     string
@@ -10,12 +12,14 @@ type VacancyCreateForm struct {
 }
 
 type Vacancy struct {
-	Email    string
-	Role     string
-	Company  string
-	Salary   string
-	Type     string
-	Location string
+	Id       int `db:"id"`
+	Email    string `db:"email"`
+	Role     string `db:"role"`
+	Company  string `db:"company"`
+	Salary   string `db:"salary"`
+	Type     string `db:"type"`
+	Location string `db:"location"`
+	Created_at time.Time `db:"created_at"`
 }
 
 func NewVacancyFromCreateForm(form VacancyCreateForm) *Vacancy {
