@@ -55,5 +55,4 @@ func (r *VacancyRepository) GetVacancies() ([]*Vacancy, error) {
 		return nil, fmt.Errorf("failed to collect vacancies from query: %w", err)
 	}
 	return vacansies, nil
-	
 }
