@@ -58,7 +58,7 @@ func NewApp(
 	vacancyService := vacancy.NewVacancyService(vacancyRepo, logger)
 
 	//Handlers
-	home.NewHandler(app, logger)
+	home.NewHandler(app, vacancyService, logger)
 	vacancy.NewHandler(app, logger, vacancyService)
 
 	return app

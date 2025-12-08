@@ -1,6 +1,7 @@
 package home
 
 import (
+	"go-fiber/internal/home/vacancy"
 	"go-fiber/pkg/t_adapter"
 	"go-fiber/views"
 
@@ -11,6 +12,7 @@ import (
 type HomeHandler struct {
 	router       fiber.Router
 	customLogger *zerolog.Logger
+	vacancyService  *vacancy.VacancyService
 }
 
 type Users struct {
@@ -18,17 +20,23 @@ type Users struct {
 	Name string
 }
 
-func NewHandler(router fiber.Router, customLogger *zerolog.Logger) {
+func NewHandler(router fiber.Router, vacancyService *vacancy.VacancyService, customLogger *zerolog.Logger) {
 	handler := &HomeHandler{
 		router:       router,
 		customLogger: customLogger,
+		vacancyService: vacancyService,
 	}
 	handler.router.Get("/", handler.home)
 	handler.router.Get("/error", handler.error)
 }
 
 func (h *HomeHandler) home(c *fiber.Ctx) error {
-	component := views.Main()
+	vacancies, err := h.vacancyService.GetVacancies()
+	if err != nil {
+		return c.SendStatus(fiber.StatusInternalServerError)
+	}
+
+	component := views.Main(vacancies)
 	return t_adapter.Render(c, component, fiber.StatusOK)
 }
 
