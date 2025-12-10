@@ -1,6 +1,7 @@
 package components
 
 import "time"
+import "github.com/rvflash/elapsed"
 
 type VacancyCardProps struct {
 	Created_at  time.Time
@@ -13,11 +14,12 @@ type VacancyCardProps struct {
 }
 
 templ VacancyCard(props VacancyCardProps) {
+	{{ date := elapsed.LocalTime(props.Created_at, "ru") }}
 	@VacancyCardStyle()
 	<div class="vacancy-card">
 		<div>
 			<span class="vacancy-card__created_at">
-				{ props.Created_at.String() }
+				{ date }
 			</span>
 		</div>
 		<div class="vacancy-card__title">
@@ -60,10 +62,14 @@ templ VacancyCardStyle() {
 	<style>
         .vacancy-card {
             display: flex;
+			width: 100%;
             flex-direction: column;
             gap: 24px;
             padding: 40px;
             border-radius: 20px;
+			border-width: thin;
+			border-style: solid;
+			border-color: var(--color-primary);
             background: var(--color-primary-white);
             box-shadow: 0 px 3px 8px 0px rgba(48, 260, 137, 0.08);
         }

@@ -9,6 +9,7 @@ import "github.com/a-h/templ"
 import templruntime "github.com/a-h/templ/runtime"
 
 import "time"
+import "github.com/rvflash/elapsed"
 
 type VacancyCardProps struct {
 	Created_at  time.Time
@@ -41,6 +42,7 @@ func VacancyCard(props VacancyCardProps) templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
+		date := elapsed.LocalTime(props.Created_at, "ru")
 		templ_7745c5c3_Err = VacancyCardStyle().Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
@@ -50,9 +52,9 @@ func VacancyCard(props VacancyCardProps) templ.Component {
 			return templ_7745c5c3_Err
 		}
 		var templ_7745c5c3_Var2 string
-		templ_7745c5c3_Var2, templ_7745c5c3_Err = templ.JoinStringErrs(props.Created_at.String())
+		templ_7745c5c3_Var2, templ_7745c5c3_Err = templ.JoinStringErrs(date)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/components/vacancy-card.templ`, Line: 20, Col: 31}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/components/vacancy-card.templ`, Line: 22, Col: 10}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var2))
 		if templ_7745c5c3_Err != nil {
@@ -65,7 +67,7 @@ func VacancyCard(props VacancyCardProps) templ.Component {
 		var templ_7745c5c3_Var3 string
 		templ_7745c5c3_Var3, templ_7745c5c3_Err = templ.JoinStringErrs(props.Role)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/components/vacancy-card.templ`, Line: 25, Col: 16}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/components/vacancy-card.templ`, Line: 27, Col: 16}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var3))
 		if templ_7745c5c3_Err != nil {
@@ -78,7 +80,7 @@ func VacancyCard(props VacancyCardProps) templ.Component {
 		var templ_7745c5c3_Var4 string
 		templ_7745c5c3_Var4, templ_7745c5c3_Err = templ.JoinStringErrs(props.Company)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/components/vacancy-card.templ`, Line: 28, Col: 19}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/components/vacancy-card.templ`, Line: 30, Col: 19}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var4))
 		if templ_7745c5c3_Err != nil {
@@ -91,7 +93,7 @@ func VacancyCard(props VacancyCardProps) templ.Component {
 		var templ_7745c5c3_Var5 string
 		templ_7745c5c3_Var5, templ_7745c5c3_Err = templ.JoinStringErrs(props.CompanyType)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/components/vacancy-card.templ`, Line: 35, Col: 26}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/components/vacancy-card.templ`, Line: 37, Col: 26}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var5))
 		if templ_7745c5c3_Err != nil {
@@ -104,7 +106,7 @@ func VacancyCard(props VacancyCardProps) templ.Component {
 		var templ_7745c5c3_Var6 string
 		templ_7745c5c3_Var6, templ_7745c5c3_Err = templ.JoinStringErrs(props.Salary)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/components/vacancy-card.templ`, Line: 41, Col: 21}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/components/vacancy-card.templ`, Line: 43, Col: 21}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var6))
 		if templ_7745c5c3_Err != nil {
@@ -117,7 +119,7 @@ func VacancyCard(props VacancyCardProps) templ.Component {
 		var templ_7745c5c3_Var7 string
 		templ_7745c5c3_Var7, templ_7745c5c3_Err = templ.JoinStringErrs(props.Location)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/components/vacancy-card.templ`, Line: 47, Col: 23}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/components/vacancy-card.templ`, Line: 49, Col: 23}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var7))
 		if templ_7745c5c3_Err != nil {
@@ -178,7 +180,7 @@ func VacancyCardStyle() templ.Component {
 			templ_7745c5c3_Var9 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 10, "<style>\n        .vacancy-card {\n            display: flex;\n            flex-direction: column;\n            gap: 24px;\n            padding: 40px;\n            border-radius: 20px;\n            background: var(--color-primary-white);\n            box-shadow: 0 px 3px 8px 0px rgba(48, 260, 137, 0.08);\n        }\n        .vacancy-card__created_at {\n            border-radius: 8px;\n            background: rgba(48, 150, 137, 0.10);\n            padding: 8px;\n            color: var(--color-primary);\n        }\n        .vacancy-card__title {\n            display: flex;\n            flex-direction: column;\n            gap: 10px;\n        }\n        .vacancy-card__role {\n            font-size: 28px;\n            font-weight: 600;\n            color: var(--color-primary-black);\n        }\n        .vacancy-card__company {\n            font-size: 16px;\n            font-weight: 400;\n            color: var(--color-primary-black);           \n        }\n        .vacancy-card__footer {\n            display: flex;\n            align-items: flex-end;\n            justify-content: space-between;\n        }\n        .vacancy-card__stat {\n            display: flex;\n            align-items: center;\n            gap: 12px;\n        }\n        .vacancy-card__stats {\n            display: flex;\n            gap: 24px;\n        }\n    </style>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 10, "<style>\n        .vacancy-card {\n            display: flex;\n\t\t\twidth: 100%;\n            flex-direction: column;\n            gap: 24px;\n            padding: 40px;\n            border-radius: 20px;\n\t\t\tborder-width: thin;\n\t\t\tborder-style: solid;\n\t\t\tborder-color: var(--color-primary);\n            background: var(--color-primary-white);\n            box-shadow: 0 px 3px 8px 0px rgba(48, 260, 137, 0.08);\n        }\n        .vacancy-card__created_at {\n            border-radius: 8px;\n            background: rgba(48, 150, 137, 0.10);\n            padding: 8px;\n            color: var(--color-primary);\n        }\n        .vacancy-card__title {\n            display: flex;\n            flex-direction: column;\n            gap: 10px;\n        }\n        .vacancy-card__role {\n            font-size: 28px;\n            font-weight: 600;\n            color: var(--color-primary-black);\n        }\n        .vacancy-card__company {\n            font-size: 16px;\n            font-weight: 400;\n            color: var(--color-primary-black);           \n        }\n        .vacancy-card__footer {\n            display: flex;\n            align-items: flex-end;\n            justify-content: space-between;\n        }\n        .vacancy-card__stat {\n            display: flex;\n            align-items: center;\n            gap: 12px;\n        }\n        .vacancy-card__stats {\n            display: flex;\n            gap: 24px;\n        }\n    </style>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

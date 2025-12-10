@@ -3,7 +3,7 @@ package views
 import "go-fiber/views/components"
 import "go-fiber/views/layout"
 import "go-fiber/views/widgets"
-import "time"
+
 import "go-fiber/internal/home/vacancy"
 
 templ Main(vacancies []*vacancy.Vacancy) {
@@ -17,28 +17,7 @@ templ Main(vacancies []*vacancy.Vacancy) {
 				@components.Title("Найди работу своей мечты")
 				@components.SubTitle("Простой поиск работы")
 			}
-			<div>
-				for _, vacancy := range vacancies {
-					@components.VacancyCard(components.VacancyCardProps{
-						Email:       vacancy.Email,
-						Location:    vacancy.Location,
-						Salary:      vacancy.Salary,
-						CompanyType: vacancy.Type,
-						Company:     vacancy.Company,
-						Created_at:  vacancy.Created_at,
-						Role:        vacancy.Role,
-					})
-				}
-			</div>
-			@components.VacancyCard(components.VacancyCardProps{
-				Email:       "",
-				Location:    "Online",
-				Salary:      "10000$",
-				CompanyType: "IT",
-				Company:     "TestCompany",
-				Created_at:  time.Now(),
-				Role:        "coder",
-			})
+			@widgets.VacancyList(vacancies)
 			<div class="main_submit-form">
 				@widgets.VacancyForm()
 			</div>

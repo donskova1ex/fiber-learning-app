@@ -44,7 +44,7 @@ func (r *VacancyRepository) CreateVacancy(vacancy *Vacancy) error {
 }
 
 func (r *VacancyRepository) GetVacancies() ([]*Vacancy, error) {
-	query := `SELECT id, email, role, company, salary, type, location, created_at FROM vacancies;`
+	query := `SELECT id, email, role, company, salary, type, location, created_at FROM vacancies ORDER BY created_at;`
 	rows, err := r.Dbpool.Query(context.Background(), query)
 	if err != nil {
 		return nil, fmt.Errorf("failed to get vacancies from database: %w", err)
