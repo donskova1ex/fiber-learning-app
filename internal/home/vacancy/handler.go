@@ -32,7 +32,9 @@ func NewHandler(router fiber.Router, customLogger *zerolog.Logger, service *Vaca
 }
 
 func (h *VacancyHandler) getAll(c *fiber.Ctx) error {
-	vacancies, err := h.service.GetVacancies()
+	PAGE_ITEMS := 2
+	page := c.QueryInt("page", 1)
+	vacancies, err := h.service.GetVacancies(PAGE_ITEMS, (page - 1) * PAGE_ITEMS)
 	if err != nil {
 		return c.Status(fiber.StatusInternalServerError).JSON(
 			fiber.Map{

@@ -29,8 +29,8 @@ func (s *VacancyService) CreateVacancy(ctx context.Context, form VacancyCreateFo
 	return nil
 }
 
-func (s *VacancyService) GetVacancies() ([]*Vacancy, error) {
-	vacanсies, err := s.repo.GetVacancies()
+func (s *VacancyService) GetVacancies(limit, offset int) ([]*Vacancy, error) {
+	vacanсies, err := s.repo.GetVacancies(limit, offset)
 	if err != nil {
 		s.log.Error().Err(err).Str("operation", "GetVacancies").Msg("failed to get vacancies in service")
 		return nil, fmt.Errorf("internal error: %w", err)

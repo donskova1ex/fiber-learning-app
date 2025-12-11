@@ -43,9 +43,14 @@ func (r *VacancyRepository) CreateVacancy(vacancy *Vacancy) error {
 	return nil
 }
 
-func (r *VacancyRepository) GetVacancies() ([]*Vacancy, error) {
-	query := `SELECT id, email, role, company, salary, type, location, created_at FROM vacancies ORDER BY created_at;`
-	rows, err := r.Dbpool.Query(context.Background(), query)
+func (r *VacancyRepository) GetVacancies(limit, offset int) ([]*Vacancy, error) {
+	query := `SELECT id, email, role, company, salary, type, location, created_at FROM vacancies ORDER BY created_at LIMIT @limit OFFSET @offset;`
+	args := pgx.NamedArgs{
+		"limit":  limit,
+		"offset": offset,
+	}
+
+	rows, err := r.Dbpool.Query(context.Background(), query, args)
 	if err != nil {
 		return nil, fmt.Errorf("failed to get vacancies from database: %w", err)
 	}

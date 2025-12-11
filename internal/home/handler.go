@@ -31,7 +31,9 @@ func NewHandler(router fiber.Router, vacancyService *vacancy.VacancyService, cus
 }
 
 func (h *HomeHandler) home(c *fiber.Ctx) error {
-	vacancies, err := h.vacancyService.GetVacancies()
+	PAGE_ITEMS := 2
+	page := c.QueryInt("page", 1)
+	vacancies, err := h.vacancyService.GetVacancies(PAGE_ITEMS, (page - 1) * PAGE_ITEMS)
 	if err != nil {
 		return c.SendStatus(fiber.StatusInternalServerError)
 	}
