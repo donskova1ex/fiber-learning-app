@@ -37,3 +37,8 @@ func (s *VacancyService) GetVacancies(limit, offset int) ([]*Vacancy, error) {
 	}
 	return vacanсies, nil
 }
+
+func (s *VacancyService) CountAllVacancies() int {
+	count := s.repo.CountAllVacancies()
+	return count
+}

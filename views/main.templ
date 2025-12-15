@@ -6,7 +6,7 @@ import "go-fiber/views/widgets"
 
 import "go-fiber/internal/home/vacancy"
 
-templ Main(vacancies []*vacancy.Vacancy) {
+templ Main(vacancies []*vacancy.Vacancy, pagesCount int, page int) {
 	@layout.Layout(layout.LayoutProps{
 		Title:           "Найди работу мечты",
 		MetaDescription: "Сайт по поиску работы мечты",

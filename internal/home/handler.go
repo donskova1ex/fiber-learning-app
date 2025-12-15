@@ -33,12 +33,13 @@ func NewHandler(router fiber.Router, vacancyService *vacancy.VacancyService, cus
 func (h *HomeHandler) home(c *fiber.Ctx) error {
 	PAGE_ITEMS := 2
 	page := c.QueryInt("page", 1)
+	count := h.vacancyService.CountAllVacancies()
 	vacancies, err := h.vacancyService.GetVacancies(PAGE_ITEMS, (page - 1) * PAGE_ITEMS)
 	if err != nil {
 		return c.SendStatus(fiber.StatusInternalServerError)
 	}
 
-	component := views.Main(vacancies)
+	component := views.Main(vacancies, count, page)
 	return t_adapter.Render(c, component, fiber.StatusOK)
 }
 
