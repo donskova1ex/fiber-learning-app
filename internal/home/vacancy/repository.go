@@ -63,8 +63,9 @@ func (r *VacancyRepository) GetVacancies(limit, offset int) ([]*Vacancy, error) 
 	return vacanсies, nil
 }
 
-func (r *VacancyRepository) CountAllVacancies() (int, error) {
+func (r *VacancyRepository) CountAllVacancies() int {
 	var count int
 	query := `SELECT COUNT(id) FROM vacancies`
-	row := r.Dbpool.QueryRow(context.Background(), query).Scan(&count)
+	r.Dbpool.QueryRow(context.Background(), query).Scan(&count)
+	return count
 }
