@@ -39,7 +39,7 @@ func (h *HomeHandler) home(c *fiber.Ctx) error {
 		return c.SendStatus(fiber.StatusInternalServerError)
 	}
 
-	component := views.Main(vacancies, count, page)
+	component := views.Main(vacancies, count , page)
 	return t_adapter.Render(c, component, fiber.StatusOK)
 }
 

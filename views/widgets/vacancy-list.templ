@@ -1,11 +1,12 @@
 package widgets
 
 import (
+	"fmt"
 	"go-fiber/internal/home/vacancy"
 	"go-fiber/views/components"
 )
 
-templ VacancyList(vacancies []*vacancy.Vacancy) {
+templ VacancyList(vacancies []*vacancy.Vacancy, pagesCount, page int) {
 	@VacancyListStyle()
 	<div class="vacancy-list__wrapper">
 		@components.Title2("Последние вакансии", false)
@@ -21,6 +22,14 @@ templ VacancyList(vacancies []*vacancy.Vacancy) {
 					Created_at:  vacancy.Created_at,
 					Role:        vacancy.Role,
 				})
+			}
+		</div>
+		<div>
+			if page != 1 {
+				<a href={ templ.SafeURL(fmt.Sprintf("/?page=%d", page-1)) }>Предыдущие</a>
+			}
+			if page == pagesCount {
+				<a href={ templ.SafeURL(fmt.Sprintf("/?page=%d", page+1)) }>Следующие</a>
 			}
 		</div>
 	</div>

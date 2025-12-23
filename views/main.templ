@@ -17,7 +17,7 @@ templ Main(vacancies []*vacancy.Vacancy, pagesCount int, page int) {
 				@components.Title("Найди работу своей мечты")
 				@components.SubTitle("Простой поиск работы")
 			}
-			@widgets.VacancyList(vacancies)
+			@widgets.VacancyList(vacancies, pagesCount, page)
 			<div class="main_submit-form">
 				@widgets.VacancyForm()
 			</div>
